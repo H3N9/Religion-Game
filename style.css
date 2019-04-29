@@ -1,0 +1,66 @@
+body{
+	background-image: url("./img/start.png");
+	background-size: cover; 
+}
+#start{
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 20vw;
+	padding: 20px;
+	font-size: 25px;
+	border: 5px solid white;
+	background: red;
+	border-radius: 12px;
+	color: white;
+	transition: 1s;
+}
+#start:hover{
+	border: 5px solid red;
+	background: white;
+	color: red;
+}
+#pause{
+	display: none;
+	width: 10vw;
+	padding: 20px;
+	font-size: 25px;
+	border: 5px solid white;
+	background: red;
+	border-radius: 12px;
+	color: white;
+	transition: 1s;
+}
+#pause:hover{
+	border: 5px solid red;
+	background: white;
+	color: red;
+}
+#boad{
+	display: none;
+	position: fixed;
+	top: 5%;
+	left:50%;
+	transform: translate(-50%,0%);
+	background: black;
+	border: 5px solid red;
+	z-index: -1;
+}
+#restart{
+	display: none;
+	width: 10vw;
+	padding: 20px;
+	font-size: 25px;
+	border: 5px solid white;
+	background: red;
+	border-radius: 12px;
+	color: white;
+	transition: 1s;
+}
+#restart:hover{
+	border: 5px solid red;
+	background: white;
+	color: red;
+}
