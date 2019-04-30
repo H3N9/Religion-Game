@@ -47,7 +47,7 @@ for(var i=0;i<3;i++){
 	list_p[i] = new Image();
 	list_p[i].src = "img/people"+(i+1)+".png";
 }
-var religion = ["Queen", "Stupid", "Idiot"];
+var religion = ["Protestant", "None", "Catholic"];
 
 // object of people
 var object = [];
@@ -131,8 +131,6 @@ function startgame(){
 	boad.fillStyle = "white";
 	boad.font = "30px calibri";
 	boad.fillText("Next(Space)  Skip(Enter)", 960, 50);
-	boad.strokeStyle = "red";
-	boad.strokeText("Next(Space)  Skip(Enter)", 960, 50);
 
 	// discription
 	if(next=="next"&&round==1){
@@ -217,8 +215,8 @@ function game_1(){
 
 
 	// check damge of people
-	if(spawn!=-1&&object[0].direct>=1060&&object[0].direct<=1160&&object[0].hp!="Queen"&&damage==0){
-		object[0].hp = "Queen";
+	if(spawn!=-1&&object[0].direct>=1060&&object[0].direct<=1160&&object[0].hp!="Protestant"&&damage==0){
+		object[0].hp = "Protestant";
 		end++;
 	}
 
@@ -235,7 +233,7 @@ function game_1(){
 	//spawn people to boad and set movment
 	for(var i=0;i<=spawn;i++){
 		object[i].walk = object[i].walk==550? 545:550;
-		object[i].direct = object[i].direct!=1060||(object[i].hp=="Queen"&&object[i].direct!=1280)||(object[i].time==0&&object[i].direct!=1280)? object[i].direct+10:object[i].direct;
+		object[i].direct = object[i].direct!=1060||(object[i].hp=="Protestant"&&object[i].direct!=1280)||(object[i].time==0&&object[i].direct!=1280)? object[i].direct+10:object[i].direct;
 		object[i].time = object[i].direct==1060&&object[i].time!=0? object[i].time-1:object[i].time;
 		boad.drawImage(object[i].people, object[i].direct, object[i].walk, 100, 100);
 		boad.fillStyle = "white";
