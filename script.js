@@ -36,8 +36,8 @@ var starter;
 var run;
 var set;
 
-//random
-var position = Math.floor(Math.random()*50);
+//random type of people
+var position = 0;
 var random_p = Math.floor(Math.random()*3);
 var random_r = Math.floor(Math.random()*3);
 
@@ -63,7 +63,7 @@ var game_time = 0;
 var end = 0;
 
 // spawn bot
-var spawn = -1;
+var spawn = 0;
 var all_spawn = 0;
 all_spawn = random_r==0? all_spawn+0:all_spawn+1;
 
@@ -97,11 +97,11 @@ function restart(){
 	clearInterval(set);
 	pause.style.display = "none";
 	round = 0;
-	position = Math.floor(Math.random()*50);
+	position = 0;
 	random_p = Math.floor(Math.random()*3);
  	random_r = Math.floor(Math.random()*3);
  	object[0] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
- 	spawn = -1;
+ 	spawn = 0;
  	damage = -1;
  	sword = "stay";
  	all_spawn = 0;
@@ -151,7 +151,7 @@ function startgame(){
 		boad.fillStyle = "black";
 		boad.font = "30px calibri";
 		boad.fillText("In time remain.", 205, 575);
-		boad.fillText("And if you don't do it, i will kill you.", 110, 605);
+		boad.fillText("And if you don't do it, you will be executed.", 110, 605);
 	}
 	if(next=="next"&&round==3){
 		boad.drawImage(text2, 100, 550, 1000, 100);
@@ -191,7 +191,7 @@ function game_1(){
 	boad.fillText(Math.floor((1800-game_time)/600)+"."+Math.floor((1800-game_time)%600/10)+" Time Remain", 950, 70);
 
 	//random spawn
-	if(game_time<=1600){
+	if(game_time<=1600&&spawn<=3){
 		position = Math.floor(Math.random()*50);
 	}
 	else if(game_time>1600){
@@ -213,15 +213,8 @@ function game_1(){
 		sword = "stay";
 	}
 
-
-	// check damge of people
-	if(spawn!=-1&&object[0].direct>=1060&&object[0].direct<=1160&&object[0].hp!="Protestant"&&damage==0){
-		object[0].hp = "Protestant";
-		end++;
-	}
-
 	// add people to object
-	if(position==21&&spawn<3){
+	if(position==21&&spawn<=3){
 		spawn++;
 		random_p = Math.floor(Math.random()*3);
 		random_r = Math.floor(Math.random()*3);
@@ -241,6 +234,12 @@ function game_1(){
     	boad.fillText(object[i].hp, object[i].direct, object[i].walk-20);
     	boad.strokeText(object[i].hp, object[i].direct, object[i].walk-20);
     }
+
+    // check damge of people
+	if(spawn!=-1&&object[0].direct>=1060&&object[0].direct<=1160&&object[0].hp!="Protestant"&&damage==0){
+		object[0].hp = "Protestant";
+		end++;
+	}
 
     // del people on boad and splice 0 
     if(object[0].direct>=1280){
@@ -265,7 +264,7 @@ function end_game(){
 	boad.drawImage(door2, 0, 0, 1280, 700);
 	boad.drawImage(wall, 950, 630);
 
-	if(end>=1&&end<=all_spawn/2){
+	if(end>=1){
 		boad.drawImage(text2, 100, 550, 1000, 100);
 		boad.fillStyle = "red";
 		boad.font = "30px calibri";
@@ -284,8 +283,5 @@ function end_game(){
 		boad.font = "30px calibri";
 		boad.fillText("Sacrifice for freedom of religion", 205, 575);
 		boad.fillText("is the beginning of a peaceful society.", 110, 605);
-	}
-	if(end>=all_spawn/2){
-		alert("You noob");
 	}
 }
