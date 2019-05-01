@@ -63,9 +63,8 @@ var game_time = 0;
 var end = 0;
 
 // spawn bot
-var spawn = 0;
+var spawn = -1;
 var all_spawn = 0;
-all_spawn = random_r==0? all_spawn+0:all_spawn+1;
 
 //function start
 
@@ -101,11 +100,10 @@ function restart(){
 	random_p = Math.floor(Math.random()*3);
  	random_r = Math.floor(Math.random()*3);
  	object[0] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
- 	spawn = 0;
+ 	spawn = -1;
  	damage = -1;
  	sword = "stay";
  	all_spawn = 0;
-	all_spawn += random_r==0? all_spawn+0:all_spawn+1;
 	end = 0;
 	game_time = 0;
  	starter = setInterval(startgame, 100);
@@ -160,10 +158,20 @@ function startgame(){
 		boad.fillText("Knight:", 110, 575);
 		boad.fillStyle = "black";
 		boad.font = "30px calibri";
-		boad.fillText("Yes, Sir", 205, 575);
-		boad.fillText("Tutorail, \"Space\" is hit", 110, 605);
+		boad.fillText("Yes, Sir.", 205, 575);
+		boad.fillText("Tutorial, \"Space\" is hit", 110, 605);
 	}
-	if(round>=4||next=="skip"){
+	if(next=="next"&&round==4){
+		boad.drawImage(text2, 100, 550, 1000, 100);
+		boad.fillStyle = "red";
+		boad.font = "30px calibri";
+		boad.fillText("Knight:", 110, 575);
+		boad.fillStyle = "black";
+		boad.font = "30px calibri";
+		boad.fillText("We must to change religion of people", 205, 575);
+		boad.fillText("to Protestant.", 110, 605);
+	}
+	if(round>=5||next=="skip"){
 		run = setInterval(game_1, 100);
 		pause.style.display = "block";
 		clearInterval(starter);
@@ -219,7 +227,7 @@ function game_1(){
 		random_p = Math.floor(Math.random()*3);
 		random_r = Math.floor(Math.random()*3);
 		object[spawn+1] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
-		all_spawn = random_r==0? all_spawn+0:all_spawn+1;
+		all_spawn += 1;
 	}
 
 
