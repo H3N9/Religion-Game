@@ -38,8 +38,8 @@ var set;
 
 //random type of people
 var position = 0;
-var random_p = Math.floor(Math.random()*3);
-var random_r = Math.floor(Math.random()*3);
+var random_p = 0;
+var random_r = 0;
 
 //list of people
 var list_p = [];
@@ -51,7 +51,7 @@ var religion = ["Protestant", "None", "Catholic"];
 
 // object of people
 var object = [];
-object[0] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
+object[0] = {people:list_p[random_p], direct:0, walk:0, hp:religion[random_r], time:0};
 
 //movement knight
 var sword = "stay";
@@ -138,7 +138,7 @@ function startgame(){
 		boad.fillText("Queen:", 110, 575);
 		boad.fillStyle = "black";
 		boad.font = "30px calibri";
-		boad.fillText("You are my knigth.", 205, 575);
+		boad.fillText("You are my knight.", 205, 575);
 		boad.fillText("And you will have to change faith of people by hurt them.", 110, 605);
 	}
 	if(next=="next"&&round==2){
@@ -226,12 +226,12 @@ function game_1(){
 		spawn++;
 		random_p = Math.floor(Math.random()*3);
 		random_r = Math.floor(Math.random()*3);
-		object[spawn+1] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
-		all_spawn += 1;
+		object[spawn] = {people:list_p[random_p], direct:-30, walk:550, hp:religion[random_r], time:50};
+		all_spawn += object[spawn].hp!="Protestant"? 1:0; 
 	}
 
 
-	//spawn people to boad and set movment
+	//spawn people to board and set movment
 	for(var i=0;i<=spawn;i++){
 		object[i].walk = object[i].walk==550? 545:550;
 		object[i].direct = object[i].direct!=1060||(object[i].hp=="Protestant"&&object[i].direct!=1280)||(object[i].time==0&&object[i].direct!=1280)? object[i].direct+10:object[i].direct;
@@ -243,16 +243,19 @@ function game_1(){
     	boad.strokeText(object[i].hp, object[i].direct, object[i].walk-20);
     }
 
+
     // check damge of people
 	if(spawn!=-1&&object[0].direct>=1060&&object[0].direct<=1160&&object[0].hp!="Protestant"&&damage==0){
 		object[0].hp = "Protestant";
 		end++;
 	}
 
-    // del people on boad and splice 0 
-    if(object[0].direct>=1280){
-    	object.splice(0, 1);
-    	spawn--;
+    // del people on board and splice 0 
+    if(spawn>=0){
+    	if(object[0].direct>=1280){
+    		object.splice(0, 1);
+    		spawn--;
+    	}
     }
 
     boad.drawImage(wall, 950, 630);
